@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <b-alert show>home </b-alert>
+    <!-- <b-alert show>home </b-alert> -->
     <Carousel />
   </div>
 </template>

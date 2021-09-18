@@ -1,15 +1,12 @@
 <template>
   <div id="app">
-    <div>
-      <Header />
-    </div>
+    <Header />
 
     <div class="main">
       <router-view />
     </div>
-    <div>
-      <Footer />
-    </div>
+
+    <Footer />
   </div>
 </template>
 
@@ -32,11 +29,15 @@ body {
 }
 
 #app {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 .main {
   margin-bottom: auto;
+}
+a{
+  text-decoration: none;
 }
 </style>

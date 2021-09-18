@@ -1,14 +1,14 @@
 <template>
-  <div>
+  <div class="product">
     <!--  <h1>product</h1> -->
     <div class="container">
       <div class="row">
-        <div class="col-3">
+        <div class="col-4">
           <img class="x" v-bind:src="product.image" alt="" />
         </div>
-        <div class="col-3">
-          <h3 v-text="product.title"></h3>
-          <h2>$ {{ product.price }}</h2>
+        <div class="col-6">
+          <h3 class="product-title" v-text="product.title"></h3>
+          <h2 class="product-price"> {{ product.price }} USD</h2>
         </div>
       </div>
     </div>
@@ -42,7 +42,37 @@ export default {
 </script>
 
 <style>
+.product{
+  min-height: calc(50vh - 60px);
+  /* background: palegreen; */
+  display: flex;
+  align-items: center;
+
+}
 .x {
-  width: 250px;
+  max-width: 250px;
+}
+.product-price{
+    font-family: Roboto;
+  font-size: 28px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #009d35;
+  padding-top: 20px;
+}
+.product-title{
+    font-family: Roboto;
+  font-size: 32px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #000;
 }
 </style>
