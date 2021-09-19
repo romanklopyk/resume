@@ -1,15 +1,19 @@
 <template>
   <div>
-    {{ Cat }}
+   <div>
+     <p>1</p>
+    <!--  <router-link :to="{name: 'Catalog', params: {id:category}}">  -->
+
+   </div>
+  
   </div>
 </template>
 
 <script>
 export default {
-
   data() {
     return {
-      Cat: [],
+      json:[]
     };
   },
   methods: {
@@ -17,16 +21,16 @@ export default {
       fetch("https://fakestoreapi.com/products/categories")
         .then((res) => res.json())
         .then((json) => console.log(json));
+            
     },
-
-
+    
     },
-
+ 
   mounted() {
     this.getCat();
-
+   
   },
-}
+};
 </script>
 
 <style lang="scss" scoped></style>

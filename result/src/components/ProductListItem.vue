@@ -12,7 +12,7 @@
         <button class="product-to-cart" @click="addToCart(product.id)">
           До кошика
         </button>
-        <p>{{$route.params.id}}</p>
+        
     </div>
   </div>
 </template>

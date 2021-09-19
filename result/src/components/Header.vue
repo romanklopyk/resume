@@ -40,7 +40,7 @@
                 >
               </li>
               <li style="position: relative;">
-                <router-link :to="{name: 'cart', params: {}}">
+                <router-link :to="{name: 'Cart', params: {}}">
                 <img class="cart-img" src="@/images/cart.svg" alt="" /> </router-link>
                 <span><CartCounter/></span>
               </li>

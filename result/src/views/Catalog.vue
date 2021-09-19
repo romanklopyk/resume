@@ -7,6 +7,7 @@
     <div class="row">
       <div class="col-3">
         <Category />
+        
       </div>
       <div class="col-9">
         <h1>Всі товари</h1>
