@@ -11,11 +11,12 @@
           <div class="header__search">
             <form action="">
               <button class="header__search-icon">
-                <img src="@/images/search.svg" alt="" /></button>
+                <img src="@/images/search.svg" alt="" />
+              </button>
 
               <div class="header__search-input">
                 <input type="text" placeholder="Пошук" />
-                </div>
+              </div>
               <button class="header__search-button">Шукати</button>
             </form>
           </div>
@@ -23,7 +24,11 @@
         <div class="col-6">
           <div>
             <ul>
-              <!--  <li><router-link :to="{ name: 'user', params: { userId: 123 }}">Каталог</router-link></li> -->
+              <li>
+                <router-link :to="{ name: 'Catalog', params: {} }"
+                  >Каталог</router-link
+                >
+              </li>
               <li>
                 <router-link :to="{ name: 'Payments', params: {} }"
                   >Оплата</router-link
@@ -34,8 +39,10 @@
                   >Доставка</router-link
                 >
               </li>
-              <li>
-                <img class="cart-img" src="@/images/cart.svg" alt="" />
+              <li style="position: relative;">
+                <router-link :to="{name: 'cart', params: {}}">
+                <img class="cart-img" src="@/images/cart.svg" alt="" /> </router-link>
+                <span><CartCounter/></span>
               </li>
             </ul>
           </div>
@@ -46,7 +53,12 @@
 </template>
 
 <script>
-export default {};
+import CartCounter from "@/components/CartCounter.vue"
+export default {
+  components:{
+    CartCounter,
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -81,7 +93,7 @@ ul {
   padding: 0;
 }
 ul > li {
-  padding: 0px 50px;
+  padding: 0px 30px;
   // background: tomato;
 }
 .header {
@@ -107,15 +119,15 @@ a {
   height: 31px;
   padding-left: 30px;
 }
-.header__search{
+.header__search {
   //  background: olivedrab;
   width: 372px;
   height: 31px;
-  form{
+  form {
     display: flex;
   }
 }
-.header__search-icon{
+.header__search-icon {
   border: none;
   border-radius: 4px 0px 0px 4px;
   width: 31px;
@@ -124,30 +136,21 @@ a {
   align-items: center;
   // background: rgb(133, 133, 143);
   position: relative;
-  img{
-    // background: orange;
-  /*   position: absolute;
-    top: 0%;
-    left: 0%;
-    transform: translateX(-50%);
-    transform: translateY(-50%); */
-  }
 }
 
-.header__search-input{
+.header__search-input {
   display: inline;
   background: crimson;
-  input{
-   
+  input {
+    outline: none;
     border: none;
     height: 31px;
-
   }
 }
-.header__search-button{
+.header__search-button {
   border: none;
   height: 31px;
   background: #ff842c;
-  border-radius: 0px 4px 4px 0px ;
+  border-radius: 0px 4px 4px 0px;
 }
 </style>

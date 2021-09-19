@@ -7,7 +7,7 @@
           <img class="x" v-bind:src="product.image" alt="" />
         </div>
         <div class="col-6">
-          <h3 class="product-title" v-text="product.title"></h3>
+        <h3 class="product-title" v-text="product.title"></h3> 
           <h2 class="product-price"> {{ product.price }} USD</h2>
         </div>
       </div>

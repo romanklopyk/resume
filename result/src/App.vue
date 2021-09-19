@@ -37,7 +37,5 @@ body {
 .main {
   margin-bottom: auto;
 }
-a{
-  text-decoration: none;
-}
+
 </style>

@@ -21,8 +21,8 @@ const routes = [{
         component: Cart
     },
     {
-        path: '/Catalog',
-        name: 'Ccatalog',
+        path: '/Catalog/:category',
+        name: 'Catalog',
         component: Catalog
     },
     {
