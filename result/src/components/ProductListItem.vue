@@ -4,28 +4,34 @@
       <img v-bind:src="product.image" alt="" />
     </div>
     <div class="product-text">
-
-        <h2 class="product-title">
+      <h2 class="product-title">
+        <!-- <router-link :to="{ name: Product, params: { id: product.id } }"> </router-link> -->
           {{ product.title }}
-        </h2>
-        <div class="product-price">{{ product.price }} USD</div>
-        <button class="product-to-cart" @click="addToCart(product.id)">
-          До кошика
-        </button>
-        
+       
+      </h2>
+      <div class="product-price">{{ product.price }} USD</div>
+      <button class="product-to-cart" @click="addToCart(product.id)">
+        До кошика
+      </button>
+      <Modal/>
     </div>
   </div>
 </template>
 
 <script>
+import Modal from '@/components/Modal.vue';
 export default {
   props: ["product"],
+  components: {
+    Modal
+  },
   methods: {
     addToCart(product_id) {
       var item = {
         count: 1,
         id: product_id,
       };
+      this.$bvModal.show('item-added');
       window.localStorage.setItem("cart", JSON.stringify(item));
       // alert("Товар додано " + product_id);
     },
@@ -35,32 +41,32 @@ export default {
 
 }
 <style lang="scss" scoped>
-.product-item{
-    width: 25%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    //  background: chartreuse;
-    margin-right: 2px;
+.product-item {
+  width: 300px;
+  padding-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  //  background: chartreuse;
+  margin-right: 2px;
 }
 
-
-.product-image{
-display: flex;
-justify-content: center;
-//  background: chocolate;
- img{
-      max-height: 200px;
- }
+.product-image {
+  display: flex;
+  justify-content: center;
+  //  background: chocolate;
+  img {
+    max-width: 200px;
+    max-height: 150px;
+  }
 }
-.product-text{
-    // background: cornflowerblue;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: end;
-    
+.product-text {
+  // background: cornflowerblue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
 }
 .product-title {
   font-size: 18px;
@@ -85,7 +91,7 @@ justify-content: center;
   color: #009d35;
 }
 .product-to-cart {
-//   width: 191px;
+  //   width: 191px;
   height: 65px;
   display: block;
   box-sizing: border-box;

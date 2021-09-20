@@ -1,11 +1,9 @@
 <template>
   <div>
-   <div>
-     <p>1</p>
-    <!--  <router-link :to="{name: 'Catalog', params: {id:category}}">  -->
-
-   </div>
-  
+    <div>
+      <p>1</p>
+      <!--  <router-link :to="{name: 'Catalog', params: {id:category}}">  -->
+    </div>
   </div>
 </template>
 
@@ -13,22 +11,23 @@
 export default {
   data() {
     return {
-      json:[]
+      caT: [],
     };
   },
+  computed: {},
   methods: {
     getCat() {
       fetch("https://fakestoreapi.com/products/categories")
         .then((res) => res.json())
-        .then((json) => console.log(json));
-            
+        .then((json) => this.caT = json);
+      // console.log("spysok katehorij - ", this.caT);  
     },
-    
-    },
- 
+  },
+
   mounted() {
     this.getCat();
-   
+    
+    
   },
 };
 </script>

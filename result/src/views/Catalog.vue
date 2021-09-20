@@ -7,12 +7,13 @@
     <div class="row">
       <div class="col-3">
         <Category />
-        
       </div>
       <div class="col-9">
         <h1>Всі товари</h1>
-        <div class="product-list">
-          <productCard v-for="i in products" :key="i.id" :product="i" />
+        <div class="product-list" >
+          <div v-for="i in products" :key="i.id"  >
+          <productCard  :product="i"/>
+          </div>
         </div>
       </div>
     </div>
@@ -58,7 +59,7 @@ export default {
 <style lang="scss" scoped>
 .product-list {
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
   flex-wrap: wrap;
 }
 h2 {

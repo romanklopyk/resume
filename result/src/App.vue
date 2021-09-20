@@ -19,6 +19,15 @@ export default {
     Header,
     Footer,
   },
+  data(){
+    return{
+      emptyCart: false,
+    }
+  },
+  methods:{
+    
+
+  }
 };
 </script>
 
@@ -37,5 +46,4 @@ body {
 .main {
   margin-bottom: auto;
 }
-
 </style>

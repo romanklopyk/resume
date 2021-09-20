@@ -32,7 +32,7 @@ export default {
       fetch("https://fakestoreapi.com/products/" + this.product_id)
         .then((res) => res.json())
         .then((json) => (this.product = json));
-      console.log(this.product);
+      // console.log(this.product);
     },
   },
   mounted() {
