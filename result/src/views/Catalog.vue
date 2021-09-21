@@ -10,9 +10,9 @@
       </div>
       <div class="col-9">
         <h1>Всі товари</h1>
-        <div class="product-list" >
-          <div v-for="i in products" :key="i.id"  >
-          <productCard  :product="i"/>
+        <div class="product-list">
+          <div v-for="i in products" :key="i.id">
+            <productCard :product="i" />
           </div>
         </div>
       </div>
@@ -29,6 +29,7 @@ export default {
     return {
       products: [],
       loadingError: false,
+      category: 0,
     };
   },
   components: {
@@ -49,9 +50,17 @@ export default {
           console.log(error);
         });
     },
+    getCategory() {
+      var category = this.route.params.category;
+      return category;
+    },
+    fetch('https://fakestoreapi.com/products/category/+ category')
+            .then(res=>res.json())
+            .then(json=>console.log(json))
   },
   mounted() {
     this.getProducts();
+    this.getCategory();
   },
 };
 </script>
