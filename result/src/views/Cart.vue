@@ -19,32 +19,43 @@
           <div class="col-12">
             <h1>Кошик замовлень</h1>
             <h2>На жаль, Ви ще нічого не додали до кошика</h2>
-            <p><router-link :to="{name: 'Catalog', params: {}}">До каталогу</router-link></p>
+            <p>
+              <router-link :to="{ name: 'Catalog', params: {} }"
+                >До каталогу</router-link
+              >
+            </p>
           </div>
         </div>
       </div>
-
-      
     </div>
-    <!-- <div class="container">
+    <div class="container">
       <div class="row">
-        <div class="col-12 clear">
-          <button>Очистити</button>
-          p
+        <div class="col-12">
+          <div v-for="i in products" :key="i.id">
+            <productCard />
+          </div>
+          <p>1</p>
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
 <script>
+import productCard from "@/components/ProductListItem.vue";
 export default {
   data() {
     return {
       product_id: null,
       product: {},
+      cat: undefined,
+      products: {},
     };
   },
+  components: {
+    productCard,
+  },
+
   methods: {
     checkCartItems() {
       var item = window.localStorage.getItem("cart");
@@ -52,6 +63,7 @@ export default {
         item = JSON.parse(item);
         this.product_id = item.id;
         this.getProduct();
+
         // console.log(item.id);
       }
     },
@@ -60,13 +72,23 @@ export default {
         .then((res) => res.json())
         .then((json) => (this.product = json));
     },
-    /*  cartClear() {
-      window.localStorage.setItem("cart",-1);
-         
-    }, */
+
+    getProductsInCategory() {
+      fetch("https://fakestoreapi.com/products/category/" + this.cat)
+        .then((res) => res.json())
+        .then((json) => {
+          this.products = json;
+          console.log(json);
+        });
+    },
+    getCat() {
+      this.cat = this.product.category;
+    },
   },
   mounted() {
     this.checkCartItems();
+    this.gatCat();
+    this.getProductsInCategory();
   },
 };
 </script>
@@ -107,7 +129,6 @@ export default {
   color: #009d35;
 }
 .clear {
- 
   button {
     margin-left: auto;
     display: block;
@@ -130,61 +151,60 @@ export default {
     border: none;
   }
 }
-.v-else{
-  .col-12{
-      display: flex;
-  flex-direction: column;
-  align-items: center;
+.v-else {
+  .col-12 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
-  h1{
+  h1 {
     text-align: center;
-      font-family: Roboto;
-  font-size: 36px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: center;
-  color: #000;
-  margin: 20px 0;
-  }
-  h2{
-
-     font-family: Roboto;
-  font-size: 22px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: center;
-  color: #ff842c;
-   padding: 12px 0 16px;
-  border-radius: 6px;
-  background-color: rgba(255, 168, 0, 0.21);
-  width: 542px;
-  }
-  p{
+    font-family: Roboto;
+    font-size: 36px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #000;
     margin: 20px 0;
-     font-family: Roboto;
-  font-size: 22px;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  text-align: center;
-  color: #fff;
-  padding: 15px 0;
-  border-radius: 6px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15);
-  background-color: #ff842c;
-  width: 178px;
-  text-decoration: none;
   }
-  a{
+  h2 {
+    font-family: Roboto;
+    font-size: 22px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ff842c;
+    padding: 12px 0 16px;
+    border-radius: 6px;
+    background-color: rgba(255, 168, 0, 0.21);
+    width: 542px;
+  }
+  p {
+    margin: 20px 0;
+    font-family: Roboto;
+    font-size: 22px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #fff;
+    padding: 15px 0;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15);
+    background-color: #ff842c;
+    width: 178px;
+    text-decoration: none;
+  }
+  a {
     text-decoration: none;
     color: white;
   }

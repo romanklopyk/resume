@@ -15,7 +15,7 @@ export default {
       if (items) {
         this.count = 1;
       }
-      console.log(items);
+      // console.log(items);
     },
   },
   mounted() {

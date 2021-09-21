@@ -25,7 +25,8 @@
           <div>
             <ul>
               <li>
-                <router-link :to="{ name: 'Catalog', params: {} }"
+                <router-link
+                  :to="{ name: 'Catalog', params: { category: 'all' } }"
                   >Каталог</router-link
                 >
               </li>
@@ -40,9 +41,10 @@
                 >
               </li>
               <li style="position: relative;">
-                <router-link :to="{name: 'Cart', params: {}}">
-                <img class="cart-img" src="@/images/cart.svg" alt="" /> </router-link>
-                <span><CartCounter/></span>
+                <router-link :to="{ name: 'Cart', params: {} }">
+                  <img class="cart-img" src="@/images/cart.svg" alt="" />
+                </router-link>
+                <span><CartCounter /></span>
               </li>
             </ul>
           </div>
@@ -53,11 +55,13 @@
 </template>
 
 <script>
-import CartCounter from "@/components/CartCounter.vue"
+import CartCounter from "@/components/CartCounter.vue";
 export default {
-  components:{
+
+  components: {
     CartCounter,
-  }
+  },
+ 
 };
 </script>
 

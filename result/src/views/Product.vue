@@ -9,6 +9,7 @@
         <div class="col-6">
         <h3 class="product-title" v-text="product.title"></h3> 
           <h2 class="product-price"> {{ product.price }} USD</h2>
+          <P>{{product.id}}</P>
         </div>
       </div>
     </div>
@@ -32,7 +33,7 @@ export default {
       fetch("https://fakestoreapi.com/products/" + this.product_id)
         .then((res) => res.json())
         .then((json) => (this.product = json));
-      // console.log(this.product);
+      console.log(this.product.id);
     },
   },
   mounted() {

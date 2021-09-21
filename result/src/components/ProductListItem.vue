@@ -5,9 +5,10 @@
     </div>
     <div class="product-text">
       <h2 class="product-title">
-        <!-- <router-link :to="{ name: Product, params: { id: product.id } }"> </router-link> -->
-          {{ product.title }}
-       
+       <router-link :to="{ name: Product, params: {id: product.id } }">
+         {{ product.title }} </router-link> 
+          
+      
       </h2>
       <div class="product-price">{{ product.price }} USD</div>
       <button class="product-to-cart" @click="addToCart(product.id)">
@@ -109,5 +110,9 @@ export default {
   text-align: center;
   color: #fff;
   border: none;
+}
+a{
+  text-decoration: none;
+  color: #000;
 }
 </style>

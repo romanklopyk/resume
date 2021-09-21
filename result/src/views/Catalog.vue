@@ -7,6 +7,9 @@
     <div class="row">
       <div class="col-3">
         <Category />
+        <p>
+          
+        </p>
       </div>
       <div class="col-9">
         <h1>Всі товари</h1>
@@ -29,15 +32,18 @@ export default {
     return {
       products: [],
       loadingError: false,
-      category: 0,
+      category: null,
     };
+  },
+  computed:{
+
   },
   components: {
     productCard,
     Category,
   },
   methods: {
-    getProducts() {
+      getProducts() {
       fetch("https://fakestoreapi.com/products")
         .then((res) => res.json())
         .then((json) => {
@@ -49,18 +55,25 @@ export default {
           //   console.log("Помилка");
           console.log(error);
         });
+    },  
+    getCategoryId() {
+      this.category = this.$route.params.category;
+      this.getProductsInCategory();
     },
-    getCategory() {
-      var category = this.route.params.category;
-      return category;
+    getProductsInCategory() {
+      fetch("https://fakestoreapi.com/products/category/" + this.category)
+        .then((res) => res.json())
+        .then((json) => {
+          this.products = json;
+          console.log(json);
+        });
     },
-    fetch('https://fakestoreapi.com/products/category/+ category')
-            .then(res=>res.json())
-            .then(json=>console.log(json))
   },
   mounted() {
-    this.getProducts();
-    this.getCategory();
+    // this.getProducts();
+    this.getCategoryId();
+
+    // this.getProductsInCategory();
   },
 };
 </script>
