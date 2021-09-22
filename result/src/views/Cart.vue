@@ -12,6 +12,18 @@
           <p class="product-price">{{ product.price }} USD</p>
         </div>
       </div>
+      <!-- ще товари цієї ж категорії -->
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div v-for="i in products" :key="i.id">
+              <productCard />
+            </div>
+            <p>1</p>
+          </div>
+        </div>
+      </div>
+      <!-- end  ще товари цієї ж категорії -->
     </div>
     <div class="v-else" v-else>
       <div class="container">
@@ -20,21 +32,12 @@
             <h1>Кошик замовлень</h1>
             <h2>На жаль, Ви ще нічого не додали до кошика</h2>
             <p>
-              <router-link :to="{ name: 'Catalog', params: {} }"
+              <router-link
+                :to="{ name: 'Catalog', params: { category: 'all' } }"
                 >До каталогу</router-link
               >
             </p>
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <div v-for="i in products" :key="i.id">
-            <productCard />
-          </div>
-          <p>1</p>
         </div>
       </div>
     </div>
@@ -48,7 +51,7 @@ export default {
     return {
       product_id: null,
       product: {},
-      cat: undefined,
+      cat: null,
       products: {},
     };
   },
@@ -63,8 +66,6 @@ export default {
         item = JSON.parse(item);
         this.product_id = item.id;
         this.getProduct();
-
-        // console.log(item.id);
       }
     },
     getProduct() {
@@ -72,7 +73,10 @@ export default {
         .then((res) => res.json())
         .then((json) => (this.product = json));
     },
-
+    getCat() {
+      this.cat = this.product.category;
+      this.getProductsInCategory();
+    },
     getProductsInCategory() {
       fetch("https://fakestoreapi.com/products/category/" + this.cat)
         .then((res) => res.json())
@@ -81,14 +85,10 @@ export default {
           console.log(json);
         });
     },
-    getCat() {
-      this.cat = this.product.category;
-    },
   },
   mounted() {
     this.checkCartItems();
     this.gatCat();
-    this.getProductsInCategory();
   },
 };
 </script>

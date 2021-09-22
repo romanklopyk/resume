@@ -7,12 +7,10 @@
     <div class="row">
       <div class="col-3">
         <Category />
-        <p>
-          
-        </p>
+        <p></p>
       </div>
       <div class="col-9">
-        <h1>Всі товари</h1>
+        <h1>{{ category }}</h1>
         <div class="product-list">
           <div v-for="i in products" :key="i.id">
             <productCard :product="i" />
@@ -35,15 +33,13 @@ export default {
       category: null,
     };
   },
-  computed:{
-
-  },
+  computed: {},
   components: {
     productCard,
     Category,
   },
   methods: {
-      getProducts() {
+    getProducts() {
       fetch("https://fakestoreapi.com/products")
         .then((res) => res.json())
         .then((json) => {
@@ -55,7 +51,7 @@ export default {
           //   console.log("Помилка");
           console.log(error);
         });
-    },  
+    },
     getCategoryId() {
       this.category = this.$route.params.category;
       this.getProductsInCategory();

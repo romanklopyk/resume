@@ -2,9 +2,13 @@
   <div>
     <p class="category-title">Товари за категоріями</p>
     <div>
-      <p>Всі товари</p>
+      <p>
+        <router-link :to="{ name: 'Catalog', params: { category: 'all' } }"
+          >Всі товари
+        </router-link>
+      </p>
       <p v-for="i in caT" :key="i">
-        <router-link :to="{ name: 'Catalog', params: { category: i  } }">{{
+        <router-link :to="{ name: 'Catalog', params: { category: i } }">{{
           i
         }}</router-link>
       </p>
@@ -25,7 +29,6 @@ export default {
       fetch("https://fakestoreapi.com/products/categories")
         .then((res) => res.json())
         .then((json) => (this.caT = json));
-      
     },
   },
 
@@ -40,7 +43,7 @@ export default {
   border-bottom: 1px solid black;
   width: 80%;
 }
-a{
+a {
   text-decoration: none;
   color: black;
 }
