@@ -12,14 +12,27 @@
           <p class="product-price">{{ product.price }} USD</p>
         </div>
       </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-12 y">
+            Оформити замовлення
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-12 x">
+            Вас також можуть зацікавити
+          </div>
+        </div>
+      </div>
       <!-- ще товари цієї ж категорії -->
       <div class="container">
         <div class="row">
           <div class="col-12">
-            <div v-for="i in products" :key="i.id">
-              <productCard />
+            <div class="d-flex">
+              <productCard v-for="i in products" :key="i.id" :product="i" />
             </div>
-            <p>1</p>
           </div>
         </div>
       </div>
@@ -51,7 +64,7 @@ export default {
     return {
       product_id: null,
       product: {},
-      cat: null,
+      product_cat: null,
       products: {},
     };
   },
@@ -71,14 +84,19 @@ export default {
     getProduct() {
       fetch("https://fakestoreapi.com/products/" + this.product_id)
         .then((res) => res.json())
-        .then((json) => (this.product = json));
+        .then((json) => {
+          this.product = json;
+          this.getCategory();
+        });
     },
-    getCat() {
-      this.cat = this.product.category;
+    getCategory() {
+      this.product_cat = this.product.category;
+      console.log("product.cat", this.product_cat);
       this.getProductsInCategory();
     },
+
     getProductsInCategory() {
-      fetch("https://fakestoreapi.com/products/category/" + this.cat)
+      fetch("https://fakestoreapi.com/products/category/" + this.product_cat)
         .then((res) => res.json())
         .then((json) => {
           this.products = json;
@@ -88,7 +106,6 @@ export default {
   },
   mounted() {
     this.checkCartItems();
-    this.gatCat();
   },
 };
 </script>
@@ -208,5 +225,37 @@ export default {
     text-decoration: none;
     color: white;
   }
+}
+.x {
+  font-family: Roboto;
+  font-size: 32px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #000;
+  padding: 30px;
+  text-align: left;
+}
+.y {
+  width: 372px;
+  height: 56px;
+ 
+  margin: 0 auto;
+  padding: 15px 63px 15px 67px;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15);
+  background-color: #ff842c;
+  font-family: Roboto;
+  font-size: 22px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #fff;
 }
 </style>

@@ -39,6 +39,21 @@ export default {
     Category,
   },
   methods: {
+    getCategoryId() {
+      this.category = this.$route.params.category;
+      // this.getProductsInCategory();
+      this.choise();
+    },
+
+    choise(){
+      if(this.category == 'all'){
+        this.getProducts()
+      }
+      else{
+        this.getProductsInCategory()
+      }
+    },
+
     getProducts() {
       fetch("https://fakestoreapi.com/products")
         .then((res) => res.json())
@@ -52,10 +67,7 @@ export default {
           console.log(error);
         });
     },
-    getCategoryId() {
-      this.category = this.$route.params.category;
-      this.getProductsInCategory();
-    },
+   
     getProductsInCategory() {
       fetch("https://fakestoreapi.com/products/category/" + this.category)
         .then((res) => res.json())
