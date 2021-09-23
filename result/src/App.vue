@@ -3,13 +3,13 @@
     <Header />
 
     <div class="main">
-      <router-view :key="$route.fullPath" />
+      <router-view />
     </div>
 
     <Footer />
   </div>
 </template>
-
+/* :key="$route.fullPath" */
 <script>
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";

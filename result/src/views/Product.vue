@@ -8,6 +8,10 @@
         <div class="col-6">
           <h3 class="product-title" v-text="product.title"></h3>
           <h2 class="product-price">{{ product.price }} USD</h2>
+          <button class="product-to-cart" @click="addToCart(product.id)">
+            До кошика
+          </button>
+          <Modal />
         </div>
       </div>
     </div>
@@ -15,7 +19,8 @@
       <div class="row">
         <div class="col-12">
           <div class="more-header">
-            Ще товари цієї ж категорії: <!-- {{ product_cat }} -->
+            Ще товари цієї ж категорії:
+            <!-- {{ product_cat }} -->
           </div>
         </div>
         <div class="row">
@@ -32,6 +37,8 @@
 
 <script>
 import productCard from "@/components/ProductListItem.vue";
+import Modal from "@/components/Modal.vue";
+
 export default {
   data() {
     return {
@@ -43,20 +50,28 @@ export default {
   },
   components: {
     productCard,
+    Modal,
+  },
+  computed: {
+    getProductId() {
+      return this.$route.params.id;
+    },
+  },
+  watch: {
+    getProductId: {
+      handler() {
+        this.getProduct();
+      },
+    },
   },
 
   methods: {
-    getProductId() {
-      this.product_id = this.$route.params.id;
-      this.getProduct();
-    },
-
     getProduct() {
-      fetch("https://fakestoreapi.com/products/" + this.product_id)
+      fetch("https://fakestoreapi.com/products/" + this.getProductId)
         .then((res) => res.json())
         .then((json) => {
           this.product = json;
-          console.log("product.id", this.product.id);
+          //console.log("product.id", this.getProductId);
           this.getCategory();
         });
     },
@@ -75,9 +90,18 @@ export default {
           console.log("getProductsInCategory", this.products);
         });
     },
+    addToCart(product_id) {
+      var item = {
+        count: 1,
+        id: product_id,
+      };
+      this.$bvModal.show("item-added");
+      window.localStorage.setItem("cart", JSON.stringify(item));
+      // alert("Товар додано " + product_id);
+    },
   },
   mounted() {
-    this.getProductId();
+    this.getProduct();
   },
 };
 </script>
@@ -129,10 +153,29 @@ export default {
   text-align: left;
   padding: 30px;
 }
-.product-more .col>div{
+.product-more .col > div {
   display: flex;
 }
-.product-one{
+.product-one {
   padding: 40px;
+}
+.product-to-cart {
+  height: 65px;
+  display: block;
+  box-sizing: border-box;
+  padding: 15px 40px;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15);
+  background-color: #ff842c;
+  font-family: Roboto;
+  font-size: 22px;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  color: #fff;
+  border: none;
 }
 </style>

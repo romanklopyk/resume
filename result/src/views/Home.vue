@@ -5,7 +5,7 @@
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <div class="product-list" >
+          <div class="product-list">
             <productCard v-for="i in products" :key="i.id" v-bind:product="i" />
           </div>
         </div>

@@ -4,19 +4,23 @@
       <div class="col" style="height:60px"></div>
     </div>
 
-    <div class="row">
+    <div v-show="!isLoadData" class="row">
       <div class="col-3">
         <Category />
         <p></p>
       </div>
       <div class="col-9">
-        <h1>{{ category }}</h1>
+        <h1>{{ currentCategory }}</h1>
         <div class="product-list">
           <div v-for="i in products" :key="i.id">
             <productCard :product="i" />
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="d-flex justify-content-center mb-3">
+      <b-spinner v-show="isLoadData" variant="primary" label=""></b-spinner>
     </div>
   </div>
 </template>
@@ -30,35 +34,54 @@ export default {
     return {
       products: [],
       loadingError: false,
-      category: null,
+      // category: null,
+      isLoadData: false,
     };
   },
-  computed: {},
+
   components: {
     productCard,
     Category,
   },
+  computed: {
+    currentCategory() {
+      return this.$route.params.category;
+    },
+  },
+  watch: {
+    currentCategory: {
+      handler() {
+        if (this.currentCategory == "all") {
+          this.getProducts();
+        } else {
+          this.getProductsInCategory();
+        }
+      },
+    },
+  },
+
   methods: {
-    getCategoryId() {
-      this.category = this.$route.params.category;
+    /*  getCategoryId() {
+      this.currentCategory = this.$route.params.category;
       // this.getProductsInCategory();
       this.choise();
-    },
+    }, */
 
-    choise(){
-      if(this.category == 'all'){
-        this.getProducts()
-      }
-      else{
-        this.getProductsInCategory()
+    choise() {
+      if (this.currentCategory == "all") {
+        this.getProducts();
+      } else {
+        this.getProductsInCategory();
       }
     },
 
     getProducts() {
+      this.isLoadData = true;
       fetch("https://fakestoreapi.com/products")
         .then((res) => res.json())
         .then((json) => {
           this.products = json;
+          this.isLoadData = false;
           //   console.log(json);
         })
         .catch((error) => {
@@ -67,21 +90,23 @@ export default {
           console.log(error);
         });
     },
-   
+
     getProductsInCategory() {
-      fetch("https://fakestoreapi.com/products/category/" + this.category)
+      this.isLoadData = true;
+      fetch(
+        "https://fakestoreapi.com/products/category/" + this.currentCategory
+      )
         .then((res) => res.json())
         .then((json) => {
           this.products = json;
           console.log(json);
+          this.isLoadData = false;
         });
     },
   },
   mounted() {
-    // this.getProducts();
-    this.getCategoryId();
-
-    // this.getProductsInCategory();
+    /* this.getCategoryId(); */
+    this.choise();
   },
 };
 </script>
@@ -91,7 +116,5 @@ export default {
   display: flex;
   // justify-content: space-between;
   flex-wrap: wrap;
-}
-h2 {
 }
 </style>
