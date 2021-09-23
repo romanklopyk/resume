@@ -3,7 +3,7 @@
     <Header />
 
     <div class="main">
-      <router-view />
+      <router-view :key="$route.fullPath" />
     </div>
 
     <Footer />
@@ -19,15 +19,12 @@ export default {
     Header,
     Footer,
   },
-  data(){
-    return{
+  data() {
+    return {
       emptyCart: false,
-    }
+    };
   },
-  methods:{
-    
-
-  }
+  methods: {},
 };
 </script>
 
