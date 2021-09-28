@@ -10,7 +10,8 @@
         <p></p>
       </div>
       <div class="col-9">
-        <h1>{{ currentCategory }}</h1>
+        <h1 v-if="all">Всі продукти</h1>
+        <h1 v-else>{{ currentCategory }}</h1>
         <div class="product-list">
           <div v-for="i in products" :key="i.id">
             <productCard :product="i" />
@@ -46,6 +47,9 @@ export default {
   computed: {
     currentCategory() {
       return this.$route.params.category;
+    },
+    all() {
+      return this.currentCategory == "all";
     },
   },
   watch: {

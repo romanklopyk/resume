@@ -83,7 +83,11 @@ export default {
     },
 
     getProductsInCategory() {
-      fetch("https://fakestoreapi.com/products/category/" + this.product_cat)
+      fetch(
+        "https://fakestoreapi.com/products/category/" +
+          this.product_cat +
+          "?limit=4"
+      )
         .then((res) => res.json())
         .then((json) => {
           this.products = json;
